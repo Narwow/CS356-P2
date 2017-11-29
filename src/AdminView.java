@@ -116,7 +116,8 @@ public class AdminView {
 
 					//add user to tree and redraw
 					selectedGroup.add(new TwitterUser(userName, selectedGroup));
-					reDraw();
+					//reDraw();
+					reloadTree();
 				}
 			}
 		});
@@ -194,8 +195,7 @@ public class AdminView {
 				}
 				
 				TwitterUser selectedUser = (TwitterUser) selectedElement.getUserObject();
-				@SuppressWarnings("deprecation")
-				Point p = frame.location();
+				Point p = frame.getLocation();
 				
 				//create a user view window 
 				UserView.newScreen(selectedUser, p.getX(), p.getY());
@@ -337,4 +337,12 @@ public class AdminView {
 		frame.dispose();
 		newScreen(rootGroup);
 	}
+	
+    private void reloadTree() {
+    	
+        tree.revalidate();
+        for (int i = 0; i < tree.getRowCount(); i++) {
+            tree.expandRow(i);
+        }
+    }
 }
